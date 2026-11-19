@@ -380,7 +380,7 @@ function finishBlock(block) {
 }
 
 // Returns false if a newer run took over while typing.
-async function typeBlock(block, id) {
+async function typeBlock(block, id, onTyped) {
   block.classList.add('reached');
   const cmd = block.querySelector('.cmd');
   const text = cmd?.dataset.full ?? '';
@@ -404,6 +404,7 @@ async function typeBlock(block, id) {
     }
   }
   if (id !== runId) return false;
+  onTyped?.();
   if (!(await runOutput(block, id))) return false;
   block.classList.add('done');
   if (!reduceMotion) await sleep(300);
@@ -443,7 +444,7 @@ async function syncSlide(slide, { animate = false } = {}) {
 
   const windows = [...slide.querySelectorAll('.window.gated')];
   // done = has the current step finished; instant = skip the pop-open animation
-  const setWindows = (done, instant) =>
+  const setWindows = (done, instant) => {
     windows.forEach((w) => {
       const gate = Number(w.dataset.gate ?? 1);
       w.classList.toggle('instant', instant);
@@ -451,6 +452,8 @@ async function syncSlide(slide, { animate = false } = {}) {
       const closeAt = Number(w.dataset.closeAt ?? Infinity); // data-close-at="4": closes when step 4 begins
       w.classList.toggle('open', ((gate === shown && done) || (gate < shown && !swap)) && shown < closeAt);
     });
+    slide.classList.toggle('windows-open', windows.some((w) => w.classList.contains('open'))); // lets other elements react (binary digits rise)
+  };
   const prepareNext = () => {
     // show a blinking prompt while waiting for the next step
     const next = groups[shown + 1]?.[0];
@@ -473,7 +476,7 @@ async function syncSlide(slide, { animate = false } = {}) {
   // while a step's output runs the slide has .processing (a "Searching..." state on a web page, a pressed button)
   if (groups[shown]?.length) slide.classList.add('processing');
   for (const block of groups[shown] ?? []) {
-    if (!(await typeBlock(block, id))) return;
+    if (!(await typeBlock(block, id, block.hasAttribute('data-opens-early') ? () => setWindows(true, false) : undefined))) return;
     if (block.hasAttribute('data-opens')) setWindows(true, false); // window pops open mid-step
   }
   slide.classList.remove('processing');

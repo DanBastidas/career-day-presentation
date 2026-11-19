@@ -9,12 +9,12 @@
   --font-ui: 'Inter', -apple-system, 'Segoe UI', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
   /* Wallpaper */
-  --wall-1: #ff7a59;
-  --wall-2: #7b5cff;
-  --wall-3: #ff3d8b;
-  --wall-base-a: #1b1f4b;
-  --wall-base-b: #3b1d6e;
-  --wall-base-c: #0e1630;
+  --wall-1: #00e1ff;
+  --wall-2: #ff6433;
+  --wall-3: #000064;
+  --wall-base-a: #000064;
+  --wall-base-b: #00124a;
+  --wall-base-c: #000032;
 
   /* Terminal */
   --term-bg: rgba(24, 24, 27, 0.9);
@@ -87,8 +87,8 @@ body {
 .blob.b1 { --left: 18%; --top: 85%; --size: 70vmax; --color: var(--wall-1); }
 .blob.b2 { --left: 85%; --top: 15%; --size: 70vmax; --color: var(--wall-2); }
 .blob.b3 { --left: 62%; --top: 105%; --size: 64vmax; --color: var(--wall-3); }
-.blob.b4 { --left: 38%; --top: 28%; --size: 42vmax; --color: #57c7ff; --alpha: 0.3; }
-.blob.b5 { --left: 8%; --top: 20%; --size: 44vmax; --color: #c58bff; --alpha: 0.35; }
+.blob.b4 { --left: 38%; --top: 28%; --size: 42vmax; --color: #ffffff; --alpha: 0.18; }
+.blob.b5 { --left: 8%; --top: 20%; --size: 44vmax; --color: #00e1ff; --alpha: 0.3; }
 
 /* ---------- reveal base overrides ---------- */
 .reveal {
@@ -735,6 +735,8 @@ body {
   display: grid;
   grid-template-columns: repeat(var(--cols), 24px);
   gap: 9px;
+  height: 123px; /* same height on every card so the numbers line up */
+  align-content: center;
   transition: opacity 0.35s, transform 0.35s;
 }
 .card .dots i {
@@ -1221,3 +1223,37 @@ section.processing .browser .searching { display: block; }
 .stage.loom .w1 { left: 740px; top: 0; }
 .stage.loom .w2 { left: 790px; top: 170px; z-index: 2; }
 .stage.loom .w3 { left: 860px; top: 330px; width: 340px; z-index: 3; }
+
+/* rock slide: the chip photo opens on top of the rock photo, same spot */
+.stage.sandbox .chipwin { z-index: 2; }
+
+/* binary lesson: the digits wait just above the terminal, then rise into place when the cards appear */
+.stage.binary.lesson .bit {
+  top: 270px;
+  transition: top 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), color 0.3s, transform 0.3s, text-shadow 0.3s;
+}
+section.windows-open .stage.binary.lesson .bit {
+  top: 0;
+}
+
+/* an empty first step (nothing has run yet): the blinking prompt comes from the next block */
+.cmd-block.blank { display: none; }
+
+/* life rules: the terminal keeps its size, the glider preview overlaps its lower right */
+.stage.glider {
+  height: 540px;
+}
+.stage.glider .terminal {
+  left: 70px;
+  width: 1100px;
+  top: 0;
+}
+.stage.glider .glider-win {
+  left: 780px;
+  top: 285px;
+  width: 460px;
+  z-index: 2;
+}
+.stage.glider .preview .window-body img {
+  max-height: 220px;
+}

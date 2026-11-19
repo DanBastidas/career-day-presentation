@@ -773,7 +773,20 @@ print(<span class="green">"Hello, world!"</span>)</div>
           <aside class="notes">My job at JetBlue. The first photo is open when the slide appears; click to open the second.</aside>
         </section>
 
-        <!-- A rock that does math: sentence, chip photo, 1s and 0s flood, then 2 + 2 -->
+        <!-- Section transition: What is Software Engineering? -->
+        <section>
+          <div class="window terminal" data-title="career-day — zsh" data-no-idle>
+            <div class="cmd-block">
+              <div class="cmd">./career-day --next</div>
+              <div class="out">
+                <p class="big">What is Software Engineering?</p>
+              </div>
+            </div>
+          </div>
+          <aside class="notes">Transition: so what do I actually do all day? What is software engineering? Start from the very beginning.</aside>
+        </section>
+
+        <!-- A rock that does math: sentence, rock photo, then the chip photo on top as electricity runs, 1s and 0s flood, then 2 + 2 -->
         <section>
           <div class="stage sandbox">
             <span class="fragment gate"></span>
@@ -785,9 +798,9 @@ print(<span class="green">"Hello, world!"</span>)</div>
                 <div class="out"><p class="lead">We took a rock, shot electricity into it, and made it do very simple math.</p></div>
               </div>
               <div class="cmd-block" data-wait data-opens>
-                <div class="cmd">open chip.png</div>
+                <div class="cmd">open rock.png</div>
               </div>
-              <div class="cmd-block" data-wait data-clear>
+              <div class="cmd-block" data-wait data-clear data-opens-early>
                 <div class="cmd">./rock --shoot-electricity</div>
                 <div class="out flood" data-char="01" data-color="green"></div>
               </div>
@@ -800,16 +813,19 @@ print(<span class="green">"Hello, world!"</span>)</div>
                 </div>
               </div>
             </div>
-            <div class="window preview sm gated w1" data-gate="1" data-title="chip.png">
+            <div class="window preview sm gated w1" data-gate="1" data-close-at="3" data-title="rock.png">
+              <img src="/images/software/rock.png" alt="A plain rock" />
+            </div>
+            <div class="window preview sm gated w1 chipwin" data-gate="2" data-title="chip.png">
               <img src="/images/software/chip.png" alt="A silicon chip, close up" />
             </div>
           </div>
-          <aside class="notes">A rock that does math. On arrival: "We took a rock, shot electricity into it, and made it do very simple math." Click 1: a close-up of a silicon chip (sand is mostly silicon). Click 2: electricity goes in and the rock's language is just 1s and 0s. Click 3: it adds 2 + 2 in binary. That's all a computer does, just billions of times a second.</aside>
+          <aside class="notes">A rock that does math. On arrival: "We took a rock, shot electricity into it, and made it do very simple math." Click 1: open a photo of a rock. Click 2: we shoot electricity into it and the rock image changes to a close-up of a silicon chip (sand is mostly silicon), and the rock's language is just 1s and 0s. Click 3: it adds 2 + 2 in binary. That's all a computer does, just billions of times a second.</aside>
         </section>
 
         <!-- Binary lesson: how to count in binary, one number per click -->
         <section>
-          <div class="stage binary">
+          <div class="stage binary lesson">
             <span class="fragment gate"></span>
             <span class="fragment gate"></span>
             <span class="fragment gate"></span>
@@ -817,39 +833,40 @@ print(<span class="green">"Hello, world!"</span>)</div>
             <span class="fragment gate"></span>
             <span class="fragment gate"></span>
             <span class="fragment gate"></span>
-            <div class="bit b16" data-on="0"></div>
-            <div class="window preview card c16" data-title="16" data-on="0" style="--cols:4">
+            <span class="fragment gate"></span>
+            <span class="fragment gate"></span>
+            <div class="bit b16" data-on="5"></div>
+            <div class="window preview card gated c16" data-gate="5" data-title="16" data-on="5" style="--cols:4">
               <div class="dots"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
               <div class="val">16</div>
             </div>
-            <div class="bit b8" data-on="0,7"></div>
-            <div class="window preview card c8" data-title="8" data-on="0,7" style="--cols:4">
+            <div class="bit b8" data-on="5,9"></div>
+            <div class="window preview card gated c8" data-gate="5" data-title="8" data-on="5,9" style="--cols:4">
               <div class="dots"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
               <div class="val">8</div>
             </div>
-            <div class="bit b4" data-on="0,5,6,7"></div>
-            <div class="window preview card c4" data-title="4" data-on="0,5,6,7" style="--cols:2">
+            <div class="bit b4" data-on="5,7,8,9"></div>
+            <div class="window preview card gated c4" data-gate="5" data-title="4" data-on="5,7,8,9" style="--cols:2">
               <div class="dots"><i></i><i></i><i></i><i></i></div>
               <div class="val">4</div>
             </div>
-            <div class="bit b2" data-on="0,3,4"></div>
-            <div class="window preview card c2" data-title="2" data-on="0,3,4" style="--cols:2">
+            <div class="bit b2" data-on="3,4,5"></div>
+            <div class="window preview card gated c2" data-gate="5" data-title="2" data-on="3,4,5" style="--cols:2">
               <div class="dots"><i></i><i></i></div>
               <div class="val">2</div>
             </div>
-            <div class="bit b1" data-on="0,2,4,6,7"></div>
-            <div class="window preview card c1" data-title="1" data-on="0,2,4,6,7" style="--cols:1">
+            <div class="bit b1" data-on="2,4,5,8,9"></div>
+            <div class="window preview card gated c1" data-gate="5" data-title="1" data-on="2,4,5,8,9" style="--cols:1">
               <div class="dots"><i></i></div>
               <div class="val">1</div>
             </div>
             <div class="window terminal" data-title="binary — zsh" data-no-idle>
-              <div class="cmd-block">
-                <div class="cmd">./binary --lesson</div>
-                <div class="out"><p class="lead">Each card is worth double the one to its right.</p></div>
+              <div class="cmd-block blank">
+                <div class="cmd"></div>
               </div>
               <div class="cmd-block" data-wait data-clear>
-                <div class="cmd">./binary --explain</div>
-                <div class="out"><p class="lead"><span class="green">dots showing</span> = count it</p><p class="lead"><span class="dim">dots hidden = skip it</span></p></div>
+                <div class="cmd">./count 0</div>
+                <div class="out"><p class="lead"><span class="blue">00000</span> <span class="dim">=</span> <span class="yellow">0</span></p></div>
               </div>
               <div class="cmd-block" data-wait data-clear>
                 <div class="cmd">./count 1</div>
@@ -862,6 +879,14 @@ print(<span class="green">"Hello, world!"</span>)</div>
               <div class="cmd-block" data-wait data-clear>
                 <div class="cmd">./count 3</div>
                 <div class="out"><p class="lead"><span class="blue">00011</span> <span class="dim">=</span> <span class="yellow">3</span></p></div>
+              </div>
+              <div class="cmd-block" data-wait data-clear data-opens>
+                <div class="cmd">./binary --lesson</div>
+                <div class="out"><p class="lead">Each card is worth double the one to its right.</p></div>
+              </div>
+              <div class="cmd-block" data-wait data-clear>
+                <div class="cmd">./binary --explain</div>
+                <div class="out"><p class="lead"><span class="green">1</span> = <span class="green">dots showing</span> = count it</p><p class="lead"><span class="dim">0 = dots hidden = skip it</span></p></div>
               </div>
               <div class="cmd-block" data-wait data-clear>
                 <div class="cmd">./count 4</div>
@@ -877,7 +902,7 @@ print(<span class="green">"Hello, world!"</span>)</div>
               </div>
             </div>
           </div>
-          <aside class="notes">How to count in binary. Arrival: five cards, 16, 8, 4, 2, 1, each worth double the one to its right. Click 1: dots showing means count it, hidden means skip it. Clicks 2 to 6: count 1, 2, 3, 4, 5 and watch the pattern (a new card lights up and the lower ones reset). Click 7: 13 = 8 + 4 + 1. Next slide is the volunteer demo.</aside>
+          <aside class="notes">How to count in binary. Arrival: just the zeros and an empty terminal. Clicks 1 to 4: count 0, 1, 2, 3 in binary with only the digits (no cards yet): 00000, 00001, 00010, 00011. Click 5: run ./binary --lesson, the cards 16, 8, 4, 2, 1 appear and the digits rise above them; each card is worth double the one to its right. Click 6: 1 means dots showing (count it), 0 means hidden (skip it). Clicks 7 and 8: count 4 and 5 with the cards. Click 9: 13 = 8 + 4 + 1. Next slide is the volunteer demo.</aside>
         </section>
 
         <!-- Binary demo: 5 volunteers hold cards; target on click, answer on the next click -->
@@ -1025,9 +1050,13 @@ print(<span class="green">"Hello, world!"</span>)</div>
           <aside class="notes">Before the layers, there was weaving. In 1804 the Jacquard loom wove patterns using punch cards. Arrival: the loom. Click 1: the loom-cards animation, showing punch cards controlling the loom. A hole means the thread goes up (1), no hole means it stays down (0), which is binary again. Click 2: the punch cards from weaving led to early computers, and then to software. You never know what will connect.</aside>
         </section>
 
-        <!-- Limitless: software is a set of rules; the four Game of Life rules, then the big statement -->
+        <!-- Limitless: software is a set of rules; then the four Game of Life rules -->
         <section>
+          <div class="stage glider">
           <div class="window terminal fill" data-title="software — zsh" data-no-idle>
+            <span class="fragment gate"></span>
+            <span class="fragment gate"></span>
+            <span class="fragment gate"></span>
             <span class="fragment gate"></span>
             <span class="fragment gate"></span>
             <span class="fragment gate"></span>
@@ -1041,21 +1070,32 @@ print(<span class="green">"Hello, world!"</span>)</div>
             </div>
             <div class="cmd-block" data-wait data-clear>
               <div class="cmd">cat life-rules.txt</div>
-              <div class="out stream" data-delay="900">
+              <div class="out stream tight" data-delay="500">
+                <div class="line"><span class="yellow">Conway's Game of Life</span></div>
                 <div class="line"><span class="blue">1.</span> A live cell with fewer than 2 neighbors <span class="red">dies</span></div>
+              </div>
+            </div>
+            <div class="cmd-block" data-wait>
+              <div class="out stream tight" data-delay="300">
                 <div class="line"><span class="blue">2.</span> A live cell with 2 or 3 neighbors <span class="green">lives</span></div>
+              </div>
+            </div>
+            <div class="cmd-block" data-wait>
+              <div class="out stream tight" data-delay="300">
                 <div class="line"><span class="blue">3.</span> A live cell with more than 3 neighbors <span class="red">dies</span></div>
+              </div>
+            </div>
+            <div class="cmd-block" data-wait>
+              <div class="out stream tight" data-delay="300">
                 <div class="line"><span class="blue">4.</span> A dead cell with exactly 3 neighbors <span class="green">comes alive</span></div>
               </div>
             </div>
-            <div class="cmd-block" data-wait data-clear>
-              <div class="cmd">./follow-the-rules</div>
-              <div class="out">
-                <p class="big">A set of rules that, when followed, can do <span class="yellow">limitless things</span></p>
-              </div>
-            </div>
           </div>
-          <aside class="notes">Software is a set of rules that, when followed, can do limitless things. On arrival: the question, "What is software?" Click 1: the answer, "Software is a set of rules." Click 2: an example, the four rules of Conway's Game of Life. That's the whole program. Click 3: the point, a set of rules that when followed can do limitless things. Next slide: run those four rules and watch what happens.</aside>
+          <div class="window preview sm gated glider-win" data-gate="6" data-title="glider.gif">
+            <img src="/images/software/glider.gif" alt="A glider moving across a Game of Life grid" />
+          </div>
+          </div>
+          <aside class="notes">Software is a set of rules that, when followed, can do limitless things. On arrival: the question, "What is software?" Click 1: the answer, "Software is a set of rules." Click 2: an example, Conway's Game of Life (the title shows first so they know what we're talking about) and rule 1. Clicks 3 to 5: rules 2, 3 and 4, one per click. Click 6: Preview opens a glider gif, overlapping the terminal, so they see what these rules can produce. That's the whole program. Next slide: run those four rules and watch what happens.</aside>
         </section>
 
         <!-- Start the Game of Life demo: runs on arrival, then the presenter takes over in the browser -->
@@ -1361,10 +1401,9 @@ print(<span class="green">"Hello, world!"</span>)</div>
           <aside class="notes">The elephant in the room: AI. The field is changing rapidly. Arrival: the tools keep changing (autocomplete, chatbots, coding agents, and what comes next). Click 1: AI is a tool that can speed up your work if you know how to use it. Click 2: but you need to understand how code works at a low level. The AI loops on its own bug until a person actually reads the code. Click 3: even with autocorrect you can't write a perfect five paragraph essay. Click 4: and even more important is understanding how complex systems work together and how to work with people. AI can join the meeting, but it provided zero useful input. The terminal ends on: AI is a tool, you're still the engineer. (The chat messages and names are placeholders.)</aside>
         </section>
 
-        <!-- Advice: four callbacks with photos stacking beside the terminal, then the dream resolves -->
+        <!-- Advice: four callbacks with photos stacking beside the terminal -->
         <section>
           <div class="stage advice">
-            <span class="fragment gate"></span>
             <span class="fragment gate"></span>
             <span class="fragment gate"></span>
             <span class="fragment gate"></span>
@@ -1395,29 +1434,21 @@ print(<span class="green">"Hello, world!"</span>)</div>
                   <div class="line dim">   we all lift each other up</div>
                 </div>
               </div>
-              <div class="cmd-block" data-wait data-clear>
-                <div class="cmd">./the-dream</div>
-                <div class="out stream tight" data-delay="900">
-                  <div class="line dim">I wanted to be a...</div>
-                  <div class="line"><span class="lead yellow">pilot</span></div>
-                  <div class="line green">✓ resolved: software engineer at an airline</div>
-                </div>
-              </div>
             </div>
-            <div class="window preview sm gated pv1" data-gate="0" data-close-at="4" data-title="new-friends.png">
+            <div class="window preview sm gated pv1" data-gate="0" data-title="new-friends.png">
               <img src="/images/the-move/new-friends.png" alt="New friends in Okinawa" />
             </div>
-            <div class="window preview sm gated pv2" data-gate="1" data-close-at="4" data-title="camp-zoom.png">
+            <div class="window preview sm gated pv2" data-gate="1" data-title="camp-zoom.png">
               <img src="/images/advice/camp-zoom.png" alt="Teaching the camp over Zoom" />
             </div>
-            <div class="window preview sm gated pv3" data-gate="2" data-close-at="4" data-title="jacquard-loom.gif">
+            <div class="window preview sm gated pv3" data-gate="2" data-title="jacquard-loom.gif">
               <img src="/images/software/loom.gif" alt="A Jacquard loom" />
             </div>
-            <div class="window preview sm gated pv4" data-gate="3" data-close-at="4" data-title="jetblue.png">
+            <div class="window preview sm gated pv4" data-gate="3" data-title="jetblue.png">
               <img src="/images/career/jetblue.png" alt="Working at JetBlue" />
             </div>
           </div>
-          <aside class="notes">Advice. Each point calls back to a story they've already heard. Arrival: don't neglect your friendships. Okinawa, and the BU community that moved with you to New York. Life throws curveballs and the people around you are how you get through them. Click 1: make the most of where you are. The camp going online turned into teaching experience and a TF job. Pause and let them finish the line: "What matters is that you find a way to..." Click 2: never stop learning. Weaving became computing, you never know what will connect. Click 3: life is a team sport. My old manager brought me to JetBlue, and we all lift each other up. Click 4: the photos close and the dream script runs one last time: I wanted to be a pilot... resolved: software engineer at an airline. Then take questions.</aside>
+          <aside class="notes">Advice. Each point calls back to a story they've already heard. Arrival: don't neglect your friendships. Okinawa, and the BU community that moved with you to New York. Life throws curveballs and the people around you are how you get through them. Click 1: make the most of where you are. The camp going online turned into teaching experience and a TF job. Pause and let them finish the line: "What matters is that you find a way to..." Click 2: never stop learning. Weaving became computing, you never know what will connect. Click 3: life is a team sport. My old manager brought me to JetBlue, and we all lift each other up. Then take questions.</aside>
         </section>
 
         <!-- Q&A: the last slide, waiting at a prompt -->
