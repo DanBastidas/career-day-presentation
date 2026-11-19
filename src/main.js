@@ -188,36 +188,44 @@ const groupsOf = (slide) => {
 const fmtCount = (el, v) => (el.textContent = Math.round(v).toLocaleString('en-US'));
 
 const barMax = (line) => Number(line.dataset.max ?? 1);
+const barMin = (line) => Number(line.dataset.from ?? 0); // data-from: the bar starts part-way
 function setBar(line, p) {
   const fill = line.querySelector('.bar-fill');
   if (!fill) return;
   fill.style.width = `${p * 100}%`;
   const hue = line.classList.contains('ok') ? 130 : line.classList.contains('fail') ? 0 : line.classList.contains('warn') ? 45 : Math.round(130 - 130 * p);
   fill.style.background = `hsl(${hue} 85% 56%)`; // default: green -> red
-  line.querySelector('.bar-pct').textContent = `${Math.round(p * 100)}%`;
+  // data-scale="6" data-unit="months": show 0..1 as 0..6 months instead of a percentage
+  const scale = Number(line.dataset.scale ?? 0);
+  line.querySelector('.bar-pct').textContent = scale
+    ? `${Math.round(p * scale * 10) / 10} ${line.dataset.unit ?? ''}`.trim()
+    : `${Math.round(p * 100)}%`;
 }
-// A line with data-finishes="bar-id" completes that earlier bar (98% -> 100%, amber -> green).
-function finishBar(bar, p) {
-  const done = p >= 1;
-  bar.classList.toggle('warn', !done);
-  bar.classList.toggle('ok', done);
-  setBar(bar, done ? 1 : barMax(bar));
+// A line with data-finishes="bar-id" continues that earlier bar: to 100% (amber -> green) by default,
+// or to data-finish-to (e.g. 0.95) keeping the bar's own colour.
+const finishTo = (line) => Number(line.dataset.finishTo ?? 1);
+const origCls = (bar) => (bar.dataset.origCls ??= ['ok', 'fail', 'warn'].find((c) => bar.classList.contains(c)) ?? 'ok');
+function finishBar(bar, done, to = 1) {
+  const orig = origCls(bar);
+  bar.classList.remove('ok', 'fail', 'warn');
+  bar.classList.add(done && to >= 1 ? 'ok' : orig);
+  setBar(bar, done ? to : barMax(bar));
 }
-function finishTarget(line, p) {
+function finishTarget(line, done) {
   const bar = line.dataset.finishes && document.getElementById(line.dataset.finishes);
-  if (bar) finishBar(bar, p);
+  if (bar) finishBar(bar, done, finishTo(line));
 }
 function setLineFinal(line) {
   line.classList.add('shown');
   line.querySelectorAll('.count').forEach((c) => fmtCount(c, Number(c.dataset.to)));
   setBar(line, barMax(line));
-  finishTarget(line, 1);
+  finishTarget(line, true);
 }
 function resetLine(line) {
   line.classList.remove('shown');
   line.querySelectorAll('.count').forEach((c) => fmtCount(c, 0));
-  setBar(line, 0);
-  finishTarget(line, 0);
+  setBar(line, barMin(line));
+  finishTarget(line, false);
 }
 // Calls step(t) with t going 0 -> 1 over `duration` ms. Returns false if cancelled.
 async function tween(duration, id, step) {
@@ -234,9 +242,12 @@ async function playLine(line, id) {
   const target = line.dataset.finishes && document.getElementById(line.dataset.finishes);
   if (target) {
     const from = barMax(target);
-    target.classList.replace('warn', 'ok');
-    if (!(await tween(900, id, (t) => setBar(target, from + (1 - from) * t)))) return false;
-    finishBar(target, 1);
+    const to = finishTo(line);
+    origCls(target);
+    if (to >= 1) target.classList.replace('warn', 'ok');
+    const dur = Number(line.dataset.finishDuration ?? 900);
+    if (!(await tween(dur, id, (t) => setBar(target, from + (to - from) * t)))) return false;
+    finishBar(target, true, to);
   }
   line.classList.add('shown');
   for (const c of line.querySelectorAll('.count')) {
@@ -246,7 +257,7 @@ async function playLine(line, id) {
   if (line.hasAttribute('data-reveal-next')) line.nextElementSibling?.classList.add('shown');
   if (line.querySelector('.bar-fill')) {
     const ms = Number(line.dataset.duration ?? 3500);
-    if (!(await tween(ms, id, (t) => setBar(line, t ** 1.4 * barMax(line))))) return false;
+    if (!(await tween(ms, id, (t) => setBar(line, barMin(line) + t ** 1.4 * (barMax(line) - barMin(line)))))) return false;
   }
   return true;
 }
@@ -308,11 +319,12 @@ const floodFull = (out) => {
   return body.clientHeight === 0 || body.scrollHeight > body.clientHeight + 1;
 };
 function floodChunk(out, n) {
-  const ch = out.dataset.char ?? '?';
+  const chars = [...(out.dataset.char ?? '?')]; // several characters = a random mix (e.g. "01")
   let text = '';
-  for (let i = 0; i < n; i++) text += Math.random() < 0.86 ? ch : ' ';
+  for (let i = 0; i < n; i++) text += Math.random() < 0.86 ? chars[Math.floor(Math.random() * chars.length)] : ' ';
   const span = document.createElement('span');
-  const color = FLOOD_COLORS[Math.floor(Math.random() * FLOOD_COLORS.length)];
+  // data-color="green" = one colour for the whole flood
+  const color = out.dataset.color ?? FLOOD_COLORS[Math.floor(Math.random() * FLOOD_COLORS.length)];
   if (color) span.className = color;
   span.textContent = text;
   out.append(span);
@@ -403,6 +415,7 @@ async function typeBlock(block, id) {
    is typed out when `animate` is true. */
 async function syncSlide(slide, { animate = false } = {}) {
   const id = ++runId;
+  slide.classList.remove('processing');
   const groups = groupsOf(slide);
   const shown = slide.querySelectorAll('.gate.visible').length; // steps already taken
 
@@ -422,6 +435,12 @@ async function syncSlide(slide, { animate = false } = {}) {
     a.textContent = g < shown || (g === shown && !animate) ? (a.dataset.text ?? '') : '';
   });
 
+  // data-on="2,4": the element (a binary card) is "lit" while the slide is on one of these steps
+  const cards = [...slide.querySelectorAll('[data-on]')];
+  const setCards = (step) =>
+    cards.forEach((c) => c.classList.toggle('on', c.dataset.on.split(',').map(Number).includes(step)));
+  setCards(animate && shown > 0 ? shown - 1 : shown); // the new step lights up once it has run
+
   const windows = [...slide.querySelectorAll('.window.gated')];
   // done = has the current step finished; instant = skip the pop-open animation
   const setWindows = (done, instant) =>
@@ -429,7 +448,8 @@ async function syncSlide(slide, { animate = false } = {}) {
       const gate = Number(w.dataset.gate ?? 1);
       w.classList.toggle('instant', instant);
       const swap = w.hasAttribute('data-swap'); // swap windows close when the next step begins
-      w.classList.toggle('open', (gate === shown && done) || (gate < shown && !swap));
+      const closeAt = Number(w.dataset.closeAt ?? Infinity); // data-close-at="4": closes when step 4 begins
+      w.classList.toggle('open', ((gate === shown && done) || (gate < shown && !swap)) && shown < closeAt);
     });
   const prepareNext = () => {
     // show a blinking prompt while waiting for the next step
@@ -450,10 +470,14 @@ async function syncSlide(slide, { animate = false } = {}) {
   for (const a of answers.filter((el) => answerGate(el) === shown)) {
     if (!(await typeAnswer(a, id))) return;
   }
+  // while a step's output runs the slide has .processing (a "Searching..." state on a web page, a pressed button)
+  if (groups[shown]?.length) slide.classList.add('processing');
   for (const block of groups[shown] ?? []) {
     if (!(await typeBlock(block, id))) return;
     if (block.hasAttribute('data-opens')) setWindows(true, false); // window pops open mid-step
   }
+  slide.classList.remove('processing');
+  setCards(shown);
   setWindows(true, false); // pops the window open with its animation
   prepareNext();
   updateDesktop();
