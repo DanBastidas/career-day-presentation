@@ -1,0 +1,795 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Career Day</title>
+  </head>
+  <body>
+    <!-- ======================= Desktop chrome ======================= -->
+    <div class="wallpaper" aria-hidden="true">
+      <div class="blob b1"></div>
+      <div class="blob b2"></div>
+      <div class="blob b3"></div>
+      <div class="blob b4"></div>
+      <div class="blob b5"></div>
+    </div>
+    <header class="menubar">
+      <div class="left">
+        <span class="logo">⌘</span>
+        <span class="app">Desktop</span>
+        <span class="menu">File</span>
+        <span class="menu">Edit</span>
+        <span class="menu">View</span>
+        <span class="menu">Window</span>
+        <span class="menu">Help</span>
+      </div>
+      <div class="right">
+        <span class="slide-count"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M2 8.5a15 15 0 0 1 20 0M5 12a10 10 0 0 1 14 0M8.5 15.5a5 5 0 0 1 7 0"/><circle cx="12" cy="19" r="1" fill="currentColor"/></svg>
+        <svg viewBox="0 0 28 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="2" y="6" width="21" height="12" rx="3"/><rect x="4.5" y="8.5" width="14" height="7" rx="1.2" fill="currentColor" stroke="none"/><path d="M25 10v4" stroke-linecap="round"/></svg>
+        <span class="clock"></span>
+      </div>
+    </header>
+
+    <nav class="dock" aria-hidden="true">
+      <div class="dock-item icon-folder">
+        <svg viewBox="0 0 24 24" fill="#fff" opacity=".95"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5h4.6l1.8 2h8.6A1.5 1.5 0 0 1 21 8.5v9a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5v-11Z"/></svg>
+      </div>
+      <div class="dock-item icon-terminal" data-app="terminal"><span>&gt;_</span></div>
+      <div class="dock-item icon-preview" data-app="preview">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2" fill="#7cc4ff"/><circle cx="16" cy="9" r="2" fill="#fff3c4"/><path d="M3 17l5-6 4 4 3-3 6 6v.5A1.5 1.5 0 0 1 19.5 20h-15A1.5 1.5 0 0 1 3 18.5Z" fill="#3d8a6b"/></svg>
+      </div>
+      <div class="dock-sep"></div>
+      <div class="dock-item icon-trash">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"><path d="M5 7h14M10 7V5h4v2M6.5 7l1 13h9l1-13M10 11v6M14 11v6"/></svg>
+      </div>
+    </nav>
+
+    <!-- ========================== Slides ============================
+         Terminal window:
+           <div class="window terminal" data-title="optional title">
+             <div class="cmd-block">
+               <div class="cmd">command to type</div>
+               <div class="out">output shown after typing</div>
+             </div>
+           </div>
+         Preview (image) window:
+           <div class="window preview" data-title="file.jpg" data-caption="optional">
+             <img src="/images/photo.jpg" alt="..." />
+           </div>
+         Sizes: add "sm" or "lg" to .window.  Side by side: wrap in <div class="split">.
+    ================================================================= -->
+    <div class="reveal">
+      <div class="slides">
+        <!-- Title -->
+        <section>
+          <div class="window terminal">
+            <div class="cmd-block">
+              <div class="cmd">./career-day --start</div>
+              <div class="out">
+                <p class="big">Career Day</p>
+                <p><span class="yellow">Your Name</span> <span class="dim">·</span> Your Job Title</p>
+              </div>
+            </div>
+          </div>
+          <aside class="notes">Introduce yourself and say hello.</aside>
+        </section>
+
+        <!-- Icebreaker intro -->
+        <section>
+          <div class="window terminal" data-title="icebreaker — zsh">
+            <div class="cmd-block">
+              <div class="cmd">cat icebreaker.txt</div>
+              <div class="out">
+                <p class="big">Pokémon or<br />Programming Language?</p>
+                <p class="dim">I'll show you a name. You guess which one it is!</p>
+              </div>
+            </div>
+          </div>
+          <aside class="notes">Explain the game: a name appears, the audience guesses Pokémon or programming language, then press next to open the picture.</aside>
+        </section>
+
+        <!-- Icebreaker 1/10: Haskell (Programming language) -->
+        <section>
+          <div class="stage">
+            <div class="window terminal">
+              <div class="cmd-block">
+                <div class="cmd">echo "Haskell"</div>
+                <div class="out"><p class="big">Haskell</p></div>
+              </div>
+              <div class="cmd-block" data-wait>
+                <div class="cmd">open haskell.png</div>
+              </div>
+            </div>
+            <span class="fragment gate"></span>
+            <div class="window preview sm gated" data-title="haskell.png" data-subtitle="Round 1 of 10">
+              <img src="/images/haskell.png" alt="Haskell" />
+            </div>
+          </div>
+          <aside class="notes">Answer: Programming language. Press next to open the picture.</aside>
+        </section>
+
+        <!-- Icebreaker 2/10: Onix (Pokémon) -->
+        <section>
+          <div class="stage">
+            <div class="window terminal">
+              <div class="cmd-block">
+                <div class="cmd">echo "Onix"</div>
+                <div class="out"><p class="big">Onix</p></div>
+              </div>
+              <div class="cmd-block" data-wait>
+                <div class="cmd">open onix.png</div>
+              </div>
+            </div>
+            <span class="fragment gate"></span>
+            <div class="window preview sm gated" data-title="onix.png" data-subtitle="Round 2 of 10">
+              <img src="/images/onix.png" alt="Onix" />
+            </div>
+          </div>
+          <aside class="notes">Answer: Pokémon. Press next to open the picture.</aside>
+        </section>
+
+        <!-- Icebreaker 3/10: Klefki (Pokémon) -->
+        <section>
+          <div class="stage">
+            <div class="window terminal">
+              <div class="cmd-block">
+                <div class="cmd">echo "Klefki"</div>
+                <div class="out"><p class="big">Klefki</p></div>
+              </div>
+              <div class="cmd-block" data-wait>
+                <div class="cmd">open klefki.png</div>
+              </div>
+            </div>
+            <span class="fragment gate"></span>
+            <div class="window preview sm gated" data-title="klefki.png" data-subtitle="Round 3 of 10">
+              <img src="/images/klefki.png" alt="Klefki" />
+            </div>
+          </div>
+          <aside class="notes">Answer: Pokémon. Press next to open the picture.</aside>
+        </section>
+
+        <!-- Icebreaker 4/10: Ada (Programming language) -->
+        <section>
+          <div class="stage">
+            <div class="window terminal">
+              <div class="cmd-block">
+                <div class="cmd">echo "Ada"</div>
+                <div class="out"><p class="big">Ada</p></div>
+              </div>
+              <div class="cmd-block" data-wait>
+                <div class="cmd">open ada.png</div>
+              </div>
+            </div>
+            <span class="fragment gate"></span>
+            <div class="window preview sm gated" data-title="ada.png" data-subtitle="Round 4 of 10">
+              <img src="/images/ada.png" alt="Ada" />
+            </div>
+          </div>
+          <aside class="notes">Answer: Programming language. Press next to open the picture.</aside>
+        </section>
+
+        <!-- Icebreaker 5/10: Simula (Programming language) -->
+        <section>
+          <div class="stage">
+            <div class="window terminal">
+              <div class="cmd-block">
+                <div class="cmd">echo "Simula"</div>
+                <div class="out"><p class="big">Simula</p></div>
+              </div>
+              <div class="cmd-block" data-wait>
+                <div class="cmd">open simula.png</div>
+              </div>
+            </div>
+            <span class="fragment gate"></span>
+            <div class="window preview sm gated" data-title="simula.png" data-subtitle="Round 5 of 10">
+              <img src="/images/simula.png" alt="Simula" />
+            </div>
+          </div>
+          <aside class="notes">Answer: Programming language. Press next to open the picture.</aside>
+        </section>
+
+        <!-- Icebreaker 6/10: Yamper (Pokémon) -->
+        <section>
+          <div class="stage">
+            <div class="window terminal">
+              <div class="cmd-block">
+                <div class="cmd">echo "Yamper"</div>
+                <div class="out"><p class="big">Yamper</p></div>
+              </div>
+              <div class="cmd-block" data-wait>
+                <div class="cmd">open yamper.png</div>
+              </div>
+            </div>
+            <span class="fragment gate"></span>
+            <div class="window preview sm gated" data-title="yamper.png" data-subtitle="Round 6 of 10">
+              <img src="/images/yamper.png" alt="Yamper" />
+            </div>
+          </div>
+          <aside class="notes">Answer: Programming language. Press next to open the picture.</aside>
+        </section>
+
+        <!-- Icebreaker 7/10: Kotlin (Programming language) -->
+        <section>
+          <div class="stage">
+            <div class="window terminal">
+              <div class="cmd-block">
+                <div class="cmd">echo "Kotlin"</div>
+                <div class="out"><p class="big">Kotlin</p></div>
+              </div>
+              <div class="cmd-block" data-wait>
+                <div class="cmd">open kotlin.png</div>
+              </div>
+            </div>
+            <span class="fragment gate"></span>
+            <div class="window preview sm gated" data-title="kotlin.png" data-subtitle="Round 7 of 10">
+              <img src="/images/kotlin.png" alt="Kotlin" />
+            </div>
+          </div>
+          <aside class="notes">Answer: Pokémon. Press next to open the picture.</aside>
+        </section>
+
+        <!-- Icebreaker 8/10: Kotlin (Programming language) -->
+        <section>
+          <div class="stage">
+            <div class="window terminal">
+              <div class="cmd-block">
+                <div class="cmd">echo "Kotlin"</div>
+                <div class="out"><p class="big">Kotlin</p></div>
+              </div>
+              <div class="cmd-block" data-wait>
+                <div class="cmd">open kotlin.png</div>
+              </div>
+            </div>
+            <span class="fragment gate"></span>
+            <div class="window preview sm gated" data-title="kotlin.png" data-subtitle="Round 8 of 10">
+              <img src="/images/kotlin.png" alt="Kotlin" />
+            </div>
+          </div>
+          <aside class="notes">Answer: Programming language. Press next to open the picture.</aside>
+        </section>
+
+        <!-- Icebreaker 9/10: Pyukumuku (Pokémon) -->
+        <section>
+          <div class="stage">
+            <div class="window terminal">
+              <div class="cmd-block">
+                <div class="cmd">echo "Pyukumuku"</div>
+                <div class="out"><p class="big">Pyukumuku</p></div>
+              </div>
+              <div class="cmd-block" data-wait>
+                <div class="cmd">open pyukumuku.png</div>
+              </div>
+            </div>
+            <span class="fragment gate"></span>
+            <div class="window preview sm gated" data-title="pyukumuku.png" data-subtitle="Round 9 of 10">
+              <img src="/images/pyukumuku.png" alt="Pyukumuku" />
+            </div>
+          </div>
+          <aside class="notes">Answer: Pokémon. Press next to open the picture.</aside>
+        </section>
+
+        <!-- Icebreaker 10/10: Lua (Programming language) -->
+        <section>
+          <div class="stage">
+            <div class="window terminal">
+              <div class="cmd-block">
+                <div class="cmd">echo "Lua"</div>
+                <div class="out"><p class="big">Lua</p></div>
+              </div>
+              <div class="cmd-block" data-wait>
+                <div class="cmd">open lua.png</div>
+              </div>
+            </div>
+            <span class="fragment gate"></span>
+            <div class="window preview sm gated" data-title="lua.png" data-subtitle="Round 10 of 10">
+              <img src="/images/lua.png" alt="Lua" />
+            </div>
+          </div>
+          <aside class="notes">Answer: Programming language. Press next to open the picture.</aside>
+        </section>
+        <!-- Who I was: High school (click: item, click: photo, ...) -->
+        <section>
+          <div class="stage">
+            <div class="window terminal" data-title="who_i_was — zsh">
+              <div class="cmd-block">
+                <div class="cmd">cat high_school.txt</div>
+                <div class="out"><p class="big">High School</p></div>
+              </div>
+              <div class="cmd-block" data-wait>
+                <div class="out"><ul><li>Teacher’s kid</li></ul></div>
+              </div>
+              <div class="cmd-block" data-wait></div>
+              <div class="cmd-block" data-wait>
+                <div class="out"><ul><li>Swim team captain</li></ul></div>
+              </div>
+              <div class="cmd-block" data-wait></div>
+              <div class="cmd-block" data-wait>
+                <div class="out"><ul><li>AP student</li></ul></div>
+              </div>
+              <div class="cmd-block" data-wait></div>
+            </div>
+            <span class="fragment gate"></span>
+            <span class="fragment gate"></span>
+            <span class="fragment gate"></span>
+            <span class="fragment gate"></span>
+            <span class="fragment gate"></span>
+            <span class="fragment gate"></span>
+            <div class="window preview sm gated" data-swap data-gate="2" data-title="teachers-kid.png" data-subtitle="1 of 3">
+              <img src="/images/high-school/teachers-kid.png" alt="Teacher’s kid" />
+            </div>
+            <div class="window preview sm gated" data-swap data-gate="4" data-title="swim-captain.png" data-subtitle="2 of 3">
+              <img src="/images/high-school/swim-captain.png" alt="Swim team captain" />
+            </div>
+            <div class="window preview sm gated" data-swap data-gate="6" data-title="ap-student.png" data-subtitle="3 of 3">
+              <img src="/images/high-school/ap-student.png" alt="AP student" />
+            </div>
+          </div>
+          <aside class="notes">Each click alternates: first the list item, then its photo. Teacher's kid, swim team captain, AP student.</aside>
+        </section>
+
+        <!-- The dream: ./the-dream floods the terminal with question marks -->
+        <section>
+          <div class="window terminal fill" data-title="the-dream — zsh" data-no-idle>
+            <div class="cmd-block">
+              <div class="cmd">./the-dream</div>
+              <div class="out flood" data-char="?"></div>
+            </div>
+          </div>
+          <aside class="notes">The dream: what I wanted to be. The script just fills the terminal with question marks, because I had no idea yet.</aside>
+        </section>
+
+        <!-- The move: three click steps (distance, rm, stress-monitor) -->
+        <section>
+          <div class="window terminal lg compact" data-title="the_move — zsh">
+            <div class="cmd-block">
+              <div class="cmd">cat the_move.txt</div>
+              <div class="out">
+                <p class="big">The Move</p>
+                <p class="dim">Rota, Spain → Okinawa, Japan</p>
+              </div>
+            </div>
+            <div class="cmd-block" data-wait>
+              <div class="cmd">./distance --from "Rota, Spain" --to "Okinawa, Japan"</div>
+              <div class="out stream" data-delay="450">
+                <div class="line"><span class="blue">Rota, Spain</span>       36.6446° N    6.3497° W</div>
+                <div class="line"><span class="blue">Okinawa, Japan</span>     26.2124° N  127.6809° E</div>
+                <div class="line dim">calculating great-circle distance...</div>
+                <div class="line"><span class="green">distance:</span> <span class="yellow"><span class="count" data-to="11530">0</span> km</span> <span class="dim">(<span class="count" data-to="7164">0</span> miles)</span></div>
+              </div>
+            </div>
+            <div class="cmd-block" data-wait>
+              <div class="cmd">rm -v friends.txt swim-team.txt college-recommendations.txt</div>
+              <div class="out stream" data-delay="650">
+                <div class="line red">removed 'friends.txt'</div>
+                <div class="line red">removed 'swim-team.txt'</div>
+                <div class="line red">removed 'college-recommendations.txt'</div>
+              </div>
+            </div>
+            <div class="cmd-block" data-wait>
+              <div class="cmd">./stress-monitor</div>
+              <div class="out stream" data-delay="400">
+                <div class="line dim">monitoring stress levels...</div>
+                <div class="line meter" data-duration="4200"><span class="yellow">stress</span></div>
+              </div>
+            </div>
+          </div>
+          <span class="fragment gate"></span>
+          <span class="fragment gate"></span>
+          <span class="fragment gate"></span>
+          <aside class="notes">Click 1: distance script (about 11,530 km / 7,164 miles). Click 2: rm deletes friends, swim team and college recommendations. Click 3: stress-monitor fills the bar.</aside>
+        </section>
+
+        <!-- What helped: first photo opens on arrival, then one per click, overlapping like real windows -->
+        <section>
+          <div class="stage cascade">
+            <span class="fragment gate"></span>
+            <span class="fragment gate"></span>
+            <div class="window preview sm w1" data-title="new-friends.png">
+              <img src="/images/the-move/new-friends.png" alt="New friends" />
+            </div>
+            <div class="window preview sm gated w2" data-gate="1" data-title="okinawa.png">
+              <img src="/images/the-move/okinawa.png" alt="Okinawa" />
+            </div>
+            <div class="window preview sm gated w3" data-gate="2" data-title="new-school.png">
+              <img src="/images/the-move/new-school.png" alt="New school" />
+            </div>
+          </div>
+          <aside class="notes">What helped me through the move. On arrival: the friends I made when I first arrived, who introduced me to other people. Click 1: Okinawa, and enjoying a brand new place. Click 2: my new school, where therapy helped me process what I'd lost so I could flourish in class.</aside>
+        </section>
+
+        <!-- What next: choose-future asks for input, then times out on click -->
+        <section>
+          <div class="window terminal" data-title="what_next — zsh">
+            <div class="cmd-block">
+              <div class="cmd">./choose-future</div>
+              <div class="out stream" data-delay="600">
+                <div class="line dim">loading possible futures... done</div>
+                <div class="line"><span class="yellow">?</span> What do you want to study?</div>
+                <div class="line"><span class="green">&gt;</span> <span class="input-cursor"></span></div>
+              </div>
+            </div>
+            <div class="cmd-block" data-wait>
+              <div class="out stream" data-delay="450">
+                <div class="line red timeout">Error: no input received</div>
+                <div class="line"><p class="big red">TIMEOUT WAITING<br />FOR USER INPUT</p></div>
+                <div class="line dim">choose-future exited with code 1</div>
+              </div>
+            </div>
+          </div>
+          <span class="fragment gate"></span>
+          <aside class="notes">What next? The script asks what I want to study and waits for an answer. Click: it times out with an error, because at this point I didn't know yet.</aside>
+        </section>
+
+        <!-- Sandbox to code: Minecraft -> Java, Roblox -> Lua, Flash -> ActionScript -->
+        <section>
+          <div class="stage sandbox">
+            <span class="fragment gate"></span>
+            <span class="fragment gate"></span>
+            <span class="fragment gate"></span>
+            <div class="window terminal" data-title="college — zsh">
+            <div class="cmd-block" data-wait data-clear data-opens>
+              <div class="cmd">open minecraft.png</div>
+            </div>
+            <div class="cmd-block">
+              <div class="cmd">cat Hello.java</div>
+              <div class="out pre"><span class="blue">public class</span> Hello {
+  <span class="blue">public static void</span> main(String[] args) {
+    System.out.println(<span class="green">"Hello, world!"</span>);
+  }
+}</div>
+            </div>
+            <div class="cmd-block" data-wait data-clear data-opens>
+              <div class="cmd">open roblox.png</div>
+            </div>
+            <div class="cmd-block">
+              <div class="cmd">cat hello.lua</div>
+              <div class="out pre"><span class="blue">local</span> part = Instance.new(<span class="green">"Part"</span>)
+part.Parent = workspace
+print(<span class="green">"Hello, world!"</span>)</div>
+            </div>
+            <div class="cmd-block" data-wait data-clear data-opens>
+              <div class="cmd">open flash-game.png</div>
+            </div>
+            <div class="cmd-block">
+              <div class="cmd">cat hello.as</div>
+              <div class="out pre"><span class="blue">function</span> onClick(e:MouseEvent):<span class="blue">void</span> {
+  trace(<span class="green">"Hello, world!"</span>);
+}</div>
+            </div>
+            </div>
+          <div class="window preview sm gated w1" data-gate="1" data-title="minecraft.png">
+            <img src="/images/college/minecraft.png" alt="Minecraft" />
+          </div>
+          <div class="window preview sm gated w2" data-gate="2" data-title="roblox.png">
+            <img src="/images/college/roblox.png" alt="Roblox" />
+          </div>
+          <div class="window preview sm gated w3" data-gate="3" data-title="flash-game.png">
+            <img src="/images/college/flash-game.png" alt="A Flash game" />
+          </div>
+          </div>
+          <aside class="notes">I always loved computers and tinkering. My dad would come home each day to find out what I'd taken apart and put back together, and he was not happy when it was the home PC. Click 1: Minecraft, empty sandbox where you can do anything, and my intro to Java. Click 2: Roblox, and Lua. Click 3: Flash games and ActionScript. That led me to want to study computer science, because I wanted to know how computers work and how I could work with them.</aside>
+        </section>
+
+        <!-- What to study: choose-future again, this time it gets an answer -->
+        <section>
+          <div class="window terminal" data-title="what_next — zsh" data-no-idle>
+            <div class="cmd-block">
+              <div class="cmd">./choose-future</div>
+              <div class="out stream" data-delay="600">
+                <div class="line dim">loading possible futures... done</div>
+                <div class="line"><span class="yellow">?</span> What do you want to study?</div>
+                <div class="line"><span class="green">&gt;</span> <span class="answer" data-gate="1" data-text="computer science"></span><span class="input-cursor once"></span></div>
+              </div>
+            </div>
+            <div class="cmd-block" data-wait>
+              <div class="out stream" data-delay="550">
+                <div class="line green accepted">✓ input accepted</div>
+                <div class="line"><span class="yellow">?</span> Where?</div>
+                <div class="line"><span class="green">&gt;</span> <span class="answer" data-gate="2" data-text="Boston University"></span><span class="input-cursor once-2"></span></div>
+              </div>
+            </div>
+            <div class="cmd-block" data-wait>
+              <div class="out stream" data-delay="550">
+                <div class="line green accepted-2">✓ input accepted</div>
+                <div class="line dim">plotting route...</div>
+              </div>
+            </div>
+          </div>
+          <span class="fragment gate"></span>
+          <span class="fragment gate"></span>
+          <aside class="notes">Second run of choose-future. This time I type in computer science and it accepts the input. Then it asks the next question: where? Click again: I type in Boston University, it accepts the input and plots the route. Next click goes to the distance slide.</aside>
+        </section>
+
+        <!-- Okinawa to Boston: the distance script again, runs on arrival -->
+        <section>
+          <div class="window terminal lg compact" data-title="distance — zsh">
+            <div class="cmd-block">
+              <div class="cmd">./distance --from "Okinawa, Japan" --to "Boston, USA"</div>
+              <div class="out stream" data-delay="450">
+                <div class="line"><span class="blue">Okinawa, Japan    </span>26.2124° N  127.6809° E</div>
+                <div class="line"><span class="blue">Boston, USA       </span>42.3601° N   71.0589° W</div>
+                <div class="line dim">calculating great-circle distance...</div>
+                <div class="line"><span class="green">distance:</span> <span class="yellow"><span class="count" data-to="12151">0</span> km</span> <span class="dim">(<span class="count" data-to="7550">0</span> miles)</span></div>
+              </div>
+            </div>
+          </div>
+          <aside class="notes">Same distance script as before, but this time from Okinawa to Boston: about 12,151 km (7,550 miles).</aside>
+        </section>
+
+        <!-- Boston University: one big photo -->
+        <section>
+          <div class="window preview lg" data-title="boston-university.png">
+            <img src="/images/boston-university/boston-university.png" alt="Boston University" />
+          </div>
+          <aside class="notes">Boston University.</aside>
+        </section>
+
+        <!-- Boston University: two photos overlapping (first on arrival, second on click) -->
+        <section>
+          <div class="stage pair">
+            <span class="fragment gate"></span>
+            <div class="window preview sm w1" data-title="bu-campus.png">
+              <img src="/images/boston-university/bu-campus.png" alt="Boston University campus" />
+            </div>
+            <div class="window preview sm gated w2" data-gate="1" data-title="bu-student-life.png">
+              <img src="/images/boston-university/bu-student-life.png" alt="Boston University student life" />
+            </div>
+          </div>
+          <aside class="notes">More of Boston University. The first photo is open when the slide appears; click to open the second.</aside>
+        </section>
+
+        <!-- College: ./college runs one year per click, then COVID-19 kills it in junior year -->
+        <section>
+          <div class="window terminal lg compact" data-title="college — zsh">
+            <div class="cmd-block">
+              <div class="cmd">./college</div>
+              <div class="out stream tight" data-delay="450">
+                <div class="line meter ok" data-duration="2400"><span class="yellow">freshman year   </span></div>
+                <div class="line green">✓ freshman year complete</div>
+              </div>
+            </div>
+            <div class="cmd-block" data-wait>
+              <div class="out stream tight" data-delay="450">
+                <div class="line meter ok" data-duration="2400"><span class="yellow">sophomore year  </span></div>
+                <div class="line green">✓ sophomore year complete</div>
+              </div>
+            </div>
+            <div class="cmd-block" data-wait>
+              <div class="out stream tight" data-delay="450">
+                <div class="line meter fail" data-duration="2600" data-max="0.78"><span class="yellow">junior year     </span></div>
+                <div class="line yellow">⚠ Warning: no internship detected</div>
+                <div class="line red">Error: COVID-19 detected</div>
+                <div class="line dim">college exited with code 1</div>
+              </div>
+            </div>
+          </div>
+          <span class="fragment gate"></span>
+          <span class="fragment gate"></span>
+          <aside class="notes">Finishing up college. Each click runs the next year. Freshman and sophomore year complete, then junior year crashes: COVID-19 detected. I applied for internships between junior and senior year and didn't get any software engineering ones, but I did get a job teaching programming to kids at a summer camp. Then the pandemic hit, the camp was cancelled and moved online, and I ended up teaching kids over Zoom.</aside>
+        </section>
+
+
+        <!-- Senior year: ./college again from junior year, then waits for an answer -->
+        <section>
+          <div class="window terminal lg compact" data-title="college — zsh" data-no-idle>
+            <div class="cmd-block">
+              <div class="cmd">./college --start junior</div>
+              <div class="out stream tight" data-delay="450">
+                <div class="line meter ok" data-duration="2400"><span class="yellow">junior year     </span></div>
+                <div class="line yellow">⚠ Warning: no internship detected</div>
+                <div class="line green">✓ junior year complete</div>
+              </div>
+            </div>
+            <div class="cmd-block" data-wait>
+              <div class="out stream tight" data-delay="450">
+                <div class="line meter warn" data-duration="4500" data-max="0.98" data-reveal-next><span class="yellow">senior year     </span></div>
+                <div class="line dim">looking for jobs...</div>
+                <div class="line"><span class="yellow">?</span> Have you found a job? <span class="dim">(y/n)</span></div>
+                <div class="line"><span class="green">&gt;</span> <span class="answer" data-gate="2" data-text="n"></span><span class="input-cursor once-2"></span></div>
+              </div>
+            </div>
+            <div class="cmd-block" data-wait>
+              <div class="out stream tight" data-delay="550">
+                <div class="line red after-answer">Error: no job found</div>
+                <div class="line dim">college exited with code 1</div>
+              </div>
+            </div>
+          </div>
+          <span class="fragment gate"></span>
+          <span class="fragment gate"></span>
+          <aside class="notes">Senior year and getting a job. The college script runs again from junior year: the internship warning shows up again, but junior year completes. Click: senior year starts, "looking for jobs..." appears under the bar, and the bar stops at 98% while the terminal asks: have you found a job? (y/n). Click again: it types n and throws an error, no job found.</aside>
+        </section>
+
+        <!-- SHPE career fair: no experience -> SHPE -> 20+ applications -> 4 offers -->
+        <section>
+          <div class="stage career">
+            <span class="fragment gate"></span>
+            <span class="fragment gate"></span>
+            <div class="window terminal scroll" data-title="first_job — zsh">
+              <div class="cmd-block">
+                <div class="cmd">cat experience.txt</div>
+                <div class="out">
+                  <ul>
+                    <li>teaching job (summer)</li>
+                    <li>TF position (senior year)</li>
+                  </ul>
+                  <p class="red">real experience: not found</p>
+                </div>
+              </div>
+              <div class="cmd-block" data-wait data-opens>
+                <div class="cmd">open shpe-logo.png</div>
+                <div class="out"><p class="dim">SHPE · Latino students in STEM</p></div>
+              </div>
+              <div class="cmd-block" data-wait>
+                <div class="cmd">./apply --fair shpe</div>
+                <div class="out stream tight" data-delay="110">
+                <div class="line"><span class="dim">[01]</span> <span class="who">Target</span> <span class="green">✓ sent</span></div>
+                <div class="line"><span class="dim">[02]</span> <span class="who blue">John Deere</span> <span class="green">✓ sent</span></div>
+                <div class="line"><span class="dim">[03]</span> <span class="who">Boeing</span> <span class="green">✓ sent</span></div>
+                <div class="line"><span class="dim">[04]</span> <span class="who">Capital One</span> <span class="green">✓ sent</span></div>
+                <div class="line"><span class="dim">[05]</span> <span class="who">State Farm</span> <span class="green">✓ sent</span></div>
+                <div class="line"><span class="dim">[06]</span> <span class="who blue">Walmart</span> <span class="green">✓ sent</span></div>
+                <div class="line"><span class="dim">[07]</span> <span class="who">Cisco</span> <span class="green">✓ sent</span></div>
+                <div class="line"><span class="dim">[08]</span> <span class="who blue">Wolters Kluwer</span> <span class="green">✓ sent</span></div>
+                <div class="line"><span class="dim">[09]</span> <span class="who">Lockheed Martin</span> <span class="green">✓ sent</span></div>
+                <div class="line"><span class="dim">[10]</span> <span class="who">Verizon</span> <span class="green">✓ sent</span></div>
+                <div class="line"><span class="dim">[11]</span> <span class="who blue">Fidelity Investments</span> <span class="green">✓ sent</span></div>
+                <div class="line"><span class="dim">[12]</span> <span class="who">Home Depot</span> <span class="green">✓ sent</span></div>
+                <div class="line"><span class="dim">[13]</span> <span class="who">Caterpillar</span> <span class="green">✓ sent</span></div>
+                <div class="line"><span class="dim">[14]</span> <span class="who">Raytheon</span> <span class="green">✓ sent</span></div>
+                <div class="line"><span class="dim">[15]</span> <span class="who blue">General Motors</span> <span class="green">✓ sent</span></div>
+                <div class="line"><span class="dim">[16]</span> <span class="who">Comcast</span> <span class="green">✓ sent</span></div>
+                <div class="line"><span class="dim">[17]</span> <span class="who">Liberty Mutual</span> <span class="green">✓ sent</span></div>
+                <div class="line"><span class="dim">[18]</span> <span class="who">Procter &amp; Gamble</span> <span class="green">✓ sent</span></div>
+                <div class="line"><span class="dim">[19]</span> <span class="who blue">Accenture</span> <span class="green">✓ sent</span></div>
+                <div class="line"><span class="dim">[20]</span> <span class="who">Deloitte</span> <span class="green">✓ sent</span></div>
+                <div class="line"><span class="dim">[21]</span> <span class="who">Ford</span> <span class="green">✓ sent</span></div>
+                <div class="line"><span class="dim">[22]</span> <span class="who">USAA</span> <span class="green">✓ sent</span></div>
+                <div class="line"><span class="dim">[23]</span> <span class="who">Nationwide</span> <span class="green">✓ sent</span></div>
+                <div class="line"><span class="dim">[24]</span> <span class="who">Intel</span> <span class="green">✓ sent</span></div>
+                </div>
+              </div>
+              <div class="cmd-block">
+                <div class="out stream tight" data-delay="650">
+                  <div class="line"><span class="green">applications:</span> <span class="yellow"><span class="count" data-to="20">0</span>+</span></div>
+                  <div class="line"><span class="green">offers:</span> <span class="yellow"><span class="count" data-to="4">0</span></span></div>
+                  <div class="line green">✓ offer received</div>
+                  <div class="line green">✓ offer received</div>
+                  <div class="line green">✓ offer received</div>
+                  <div class="line green">✓ offer received</div>
+                </div>
+              </div>
+            </div>
+            <div class="window preview sm gated" data-gate="1" data-title="shpe-logo.png">
+              <img src="/images/shpe/shpe-logo.png" alt="SHPE logo" />
+            </div>
+          </div>
+          <aside class="notes">How I got my first job. My work experience was limited to the summer teaching job and a TF position my senior year, so I didn't have any real experience. I found my job through SHPE, an organization for Latino students in STEM. Their career fair was virtual because of the pandemic. Click 1: the SHPE logo. Click 2: I applied to over 20 jobs there, many at places I didn't even know hired software engineers (John Deere, Walmart, Wolters Kluwer, General Motors, Fidelity Investments, Accenture), and got offers from 4.</aside>
+        </section>
+
+        <!-- Found a job: ./college from senior year; answers y, then Fidelity Investments -->
+        <section>
+          <div class="window terminal lg compact" data-title="college — zsh" data-no-idle>
+            <div class="cmd-block">
+              <div class="cmd">./college --start senior</div>
+              <div class="out stream tight" data-delay="450">
+                <div class="line meter warn" id="senior-bar-2" data-duration="4500" data-max="0.98" data-reveal-next><span class="yellow">senior year     </span></div>
+                <div class="line dim">looking for jobs...</div>
+                <div class="line"><span class="yellow">?</span> Have you found a job? <span class="dim">(y/n)</span></div>
+                <div class="line"><span class="green">&gt;</span> <span class="answer" data-gate="1" data-text="y"></span><span class="input-cursor once"></span></div>
+              </div>
+            </div>
+            <div class="cmd-block" data-wait>
+              <div class="out stream tight" data-delay="550">
+                <div class="line green accepted">✓ input accepted</div>
+                <div class="line"><span class="yellow">?</span> Where?</div>
+                <div class="line"><span class="green">&gt;</span> <span class="answer" data-gate="2" data-text="Fidelity Investments"></span><span class="input-cursor once-2"></span></div>
+              </div>
+            </div>
+            <div class="cmd-block" data-wait>
+              <div class="out stream tight" data-delay="550">
+                <div class="line green accepted-2">✓ input accepted</div>
+                <div class="line green" data-finishes="senior-bar-2">✓ senior year complete</div>
+              </div>
+            </div>
+          </div>
+          <span class="fragment gate"></span>
+          <span class="fragment gate"></span>
+          <aside class="notes">The college script again, starting at senior year. It looks for jobs and asks: have you found a job? Click: it types y and asks where. Click: it types Fidelity Investments, the senior year bar finishes and senior year completes.</aside>
+        </section>
+
+        <!-- About me -->
+        <section>
+          <div class="window terminal" data-title="about_me.txt — zsh">
+            <div class="cmd-block">
+              <div class="cmd">cat about_me.txt</div>
+              <div class="out">
+                <ul>
+                  <li class="fragment">Where I work</li>
+                  <li class="fragment">What I do every day</li>
+                  <li class="fragment">A fun fact</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- A day in my life (vertical stack: press ↓) -->
+        <section>
+          <section>
+            <div class="window terminal">
+              <div class="cmd-block">
+                <div class="cmd">cat schedule.txt</div>
+                <div class="out pre"><span class="dim"># A day in my life</span>
+<span class="green">08:00</span>  Morning thing
+<span class="green">12:00</span>  Lunch
+<span class="green">15:00</span>  Afternoon thing
+<span class="dim">press ↓ for more</span></div>
+              </div>
+            </div>
+          </section>
+          <section>
+            <div class="window preview" data-title="morning.jpg" data-subtitle="1 of 2">
+              <img src="/images/placeholder.svg" alt="Placeholder photo" />
+            </div>
+          </section>
+          <section>
+            <div class="window preview" data-title="afternoon.jpg" data-subtitle="2 of 2" data-caption="Add a caption with data-caption">
+              <img src="/images/placeholder.svg" alt="Placeholder photo" />
+            </div>
+          </section>
+        </section>
+
+        <!-- Terminal + Preview side by side -->
+        <section>
+          <div class="split">
+            <div class="window terminal">
+              <div class="cmd-block">
+                <div class="cmd">ls ~/tools</div>
+                <div class="out pre"><span class="blue">laptop/</span>  <span class="blue">notebook/</span>
+<span class="pink">favorite_app</span>  coffee.mug</div>
+              </div>
+            </div>
+            <div class="window preview sm" data-title="my-desk.jpg">
+              <img src="/images/placeholder.svg" alt="Placeholder photo" />
+            </div>
+          </div>
+        </section>
+
+        <!-- How I got here -->
+        <section>
+          <div class="window terminal">
+            <div class="cmd-block">
+              <div class="cmd">history</div>
+              <div class="out">
+                <p class="fragment"><span class="dim">  1</span>  school</p>
+                <p class="fragment"><span class="dim">  2</span>  first-job</p>
+                <p class="fragment"><span class="dim">  3</span>  today</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Big photo -->
+        <section>
+          <div class="window preview lg" data-title="team.jpg">
+            <img src="/images/placeholder.svg" alt="Placeholder photo" />
+          </div>
+        </section>
+
+        <!-- Q&A -->
+        <section>
+          <div class="window terminal">
+            <div class="cmd-block">
+              <div class="cmd">echo "Any questions?"</div>
+              <div class="out"><p class="big">Any questions?</p></div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
