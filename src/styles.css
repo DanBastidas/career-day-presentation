@@ -411,6 +411,10 @@ body {
   white-space: pre-wrap;
   word-break: break-all;
 }
+.out.flood .flood-row {
+  white-space: pre;
+  overflow: hidden;
+}
 .cmd-block.live > .out {
   visibility: visible;
 }
@@ -673,8 +677,10 @@ body {
   height: 0;
   overflow: hidden;
 }
-/* a gated window stays hidden until its step has run, then pops open */
-.reveal .slides section.present:not(.stack) .window.gated:not(.open) {
+/* a gated window stays hidden until its step has run, then pops open. This also applies while a
+   slide fades out, so windows that already closed (data-close-at, data-swap) don't flash back.
+   In the overview (Esc) every window still shows. */
+.reveal:not(.overview) .slides section:not(.stack) .window.gated:not(.open) {
   visibility: hidden;
   animation: none;
 }
@@ -997,6 +1003,29 @@ section.processing .browser .searching { display: block; }
 .stage.breakdown .preview .window-body img {
   max-height: 330px;
 }
+/* second kiosk photo opens on top of the first, slightly offset */
+.stage.breakdown .preview.k2 {
+  left: 50px;
+  top: 110px;
+  z-index: 2;
+}
+
+/* college slide: the terminal grows to fit all four years, the summer camp photo opens beside it */
+.stage.sandbox .terminal.college {
+  top: 0;
+  width: 680px;
+}
+.stage.sandbox .terminal.college .window-body {
+  height: auto;
+}
+.stage.sandbox .campwin {
+  left: 700px;
+  top: 40px;
+  width: 540px;
+}
+.stage.sandbox .campwin .window-body img {
+  max-height: 380px;
+}
 
 /* ---------- senior engineer: project board + terminal ---------- */
 .stage.board {
@@ -1138,10 +1167,37 @@ section.processing .browser .searching { display: block; }
 .mini .essay p {
   margin: 0 0 8px;
 }
-.mini .essay .cap {
-  margin-top: 10px;
-  font: 700 13px/1.3 system-ui, sans-serif;
+/* the AI essay opens big so the room can read it and spot the wrong date */
+.stage.sandbox .mini.essaywin {
+  left: 560px;
+  top: 0;
+  width: 680px;
+  z-index: 3;
+}
+.stage.sandbox .mini.essaywin .page {
+  padding: 26px 34px 28px;
+}
+.mini.essaywin .essay {
+  font-size: 28px;
+  line-height: 1.45;
+}
+.mini.essaywin .essay h4 {
+  margin: 0 0 14px;
+  font-size: 32px;
+}
+.mini.essaywin .essay p {
+  margin: 0 0 14px;
+}
+.mini .essay mark.wrong {
+  background: none;
+  color: inherit;
+  border-radius: 4px;
+  transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+}
+.mini .essay mark.wrong.on {
+  background: #fee2e2;
   color: #b91c1c;
+  box-shadow: 0 0 0 3px #ef4444;
 }
 .mini .msg {
   margin: 0 0 10px;

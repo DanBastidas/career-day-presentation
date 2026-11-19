@@ -17,7 +17,7 @@ import './styles.css';
    --------------------------------------------------------- */
 const TERMINAL = {
   user: 'daniel',
-  host: 'vsh-career-day',
+  host: 'vhs-career-day',
   dir: '~',
   typeSpeed: [40, 90], // ms per character (min, max)
 };
@@ -332,10 +332,62 @@ function floodChunk(out, n) {
 function floodFill(out) {
   for (let guard = 0; !floodFull(out) && guard < 3000; guard++) floodChunk(out, 24);
 }
+/* data-endless on a flood: it never stops. The text is laid out in fixed-width rows, and once
+   the window is full it keeps going like a real terminal, scrolling up one row at a time. */
+function floodCols(out) {
+  const probe = document.createElement('span');
+  probe.textContent = 'M'.repeat(20);
+  out.append(probe);
+  const charW = probe.offsetWidth / 20; // layout size, not the on-screen size reveal scales the slide to
+  probe.remove();
+  return Math.max(1, Math.floor(out.clientWidth / charW));
+}
+function floodRows(out, n, cols) {
+  const chars = [...(out.dataset.char ?? '?')];
+  while (n > 0) {
+    let row = out.lastElementChild;
+    if (!row || Number(row.dataset.len) >= cols) {
+      row = document.createElement('div');
+      row.className = 'flood-row';
+      row.dataset.len = '0';
+      out.append(row);
+    }
+    const take = Math.min(n, cols - Number(row.dataset.len));
+    let text = '';
+    for (let i = 0; i < take; i++) text += Math.random() < 0.86 ? chars[Math.floor(Math.random() * chars.length)] : ' ';
+    const span = document.createElement('span');
+    const color = out.dataset.color ?? FLOOD_COLORS[Math.floor(Math.random() * FLOOD_COLORS.length)];
+    if (color) span.className = color;
+    span.textContent = text;
+    row.append(span);
+    row.dataset.len = String(Number(row.dataset.len) + take);
+    n -= take;
+  }
+  // keep the newest output in view and drop rows that scrolled far out of sight
+  const body = floodBody(out);
+  body.scrollTop = body.scrollHeight;
+  while (out.childElementCount > 120) out.firstElementChild.remove();
+}
+async function endlessFlood(block, out, id) {
+  const cols = floodCols(out);
+  if (reduceMotion) {
+    for (let guard = 0; !floodFull(out) && guard < 500; guard++) floodRows(out, cols, cols);
+    return id === runId;
+  }
+  await sleep(350);
+  // starts as a trickle, speeds up, then keeps scrolling until the slide changes
+  for (let step = 0; id === runId; step++) {
+    floodRows(out, Math.min(1 + Math.floor(step / 5), Math.ceil(cols / 2)), cols);
+    await sleep(40);
+  }
+  return false;
+}
+
 async function floodBlock(block, id) {
   const out = block.querySelector('.flood');
   block.classList.add('live');
   out.replaceChildren();
+  if (out.hasAttribute('data-endless')) return endlessFlood(block, out, id);
   if (!reduceMotion) {
     await sleep(350);
     // starts as a trickle, then speeds up until the window is full
