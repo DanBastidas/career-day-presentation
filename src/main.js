@@ -522,10 +522,22 @@ function updateDesktop() {
   const hasTerminal = !!slide.querySelector('.terminal');
   const popup = !!slide.querySelector('.preview.gated.open'); // a window just opened on top
   const hasPreview = !!slide.querySelector('.preview:not(.gated)') || popup;
+  // a web browser window counts once it is on screen (gated ones only after they have opened)
+  const hasBrowser = [...slide.querySelectorAll('.window.browser')].some((w) => !w.classList.contains('gated') || w.classList.contains('open'));
+  document.querySelector('.dock [data-app="browser"]').classList.toggle('running', hasBrowser);
+  // from the slide marked data-dock="claude" onwards, the Claude icon is in the dock, running
+  const claude = document.querySelector('.dock [data-app="claude"]');
+  const slides = deck.getSlides();
+  const claudeFrom = slides.findIndex((s) => s.dataset.dock === 'claude');
+  const hasClaude = claudeFrom >= 0 && slides.indexOf(slide) >= claudeFrom;
+  claude.hidden = !hasClaude;
+  claude.classList.toggle('running', hasClaude);
   document.querySelector('.dock [data-app="terminal"]').classList.toggle('running', hasTerminal);
   document.querySelector('.dock [data-app="preview"]').classList.toggle('running', hasPreview);
   document.querySelector('.menubar .app').textContent = popup
     ? 'Preview'
+    : hasBrowser && !hasTerminal && !hasPreview ? 'Browser'
+    : hasBrowser ? 'Desktop'
     : hasTerminal && !hasPreview ? 'Terminal' : hasPreview && !hasTerminal ? 'Preview' : 'Desktop';
 }
 

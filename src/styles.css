@@ -218,6 +218,27 @@ body {
 .icon-preview {
   background: linear-gradient(#ffffff, #e4e4e4);
 }
+.dock-item[hidden] {
+  display: none;
+}
+.icon-claude {
+  background: linear-gradient(#fbf3e9, #eadcc9);
+  animation: dock-pop 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.4);
+}
+@keyframes dock-pop {
+  from { transform: translateY(18px) scale(0.4); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+.icon-browser {
+  background: linear-gradient(#5db4ff, #1d6fe0);
+}
+.icon-claude img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+}
+.icon-claude svg,
+.icon-browser svg,
 .icon-preview svg,
 .icon-folder svg,
 .icon-trash svg {
@@ -1145,30 +1166,6 @@ section.processing .browser .searching { display: block; }
 .stage.sandbox .mini.w1 { left: 740px; top: 20px;  width: 440px; }
 .stage.sandbox .mini.w2 { left: 790px; top: 220px; width: 440px; }
 
-/* ---------- loom: punch card ---------- */
-.stage.sandbox .punchwin .page {
-  height: auto;
-  padding: 14px 16px 16px;
-}
-.punch {
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  gap: 7px;
-  padding: 14px;
-  background: #f3e3c3;
-  border: 2px solid #d4b685;
-  border-radius: 6px;
-}
-.punch i {
-  height: 15px;
-  border-radius: 3px;
-  background: #1f2937;
-}
-.punch i.off {
-  background: rgba(0, 0, 0, 0.07);
-}
-.stage.sandbox .punchwin { left: 790px; top: 120px; width: 400px; }
-
 /* ---------- advice: callback photos stacking beside the terminal ---------- */
 .stage.advice {
   height: 580px;
@@ -1191,11 +1188,6 @@ section.processing .browser .searching { display: block; }
   max-height: 170px;
 }
 
-/* loom slide: spread the three windows so the punch card stays visible */
-.stage.loom .w1 { left: 740px; top: 0; }
-.stage.loom .punchwin { left: 800px; top: 150px; }
-.stage.loom .w3 { left: 860px; top: 330px; width: 340px; }
-.stage.loom .punchwin { left: 780px; top: 190px; z-index: 6; }
 
 /* binary digits above the cards: 1 when the card shows its dots, 0 when hidden */
 .stage.binary {
@@ -1224,3 +1216,8 @@ section.processing .browser .searching { display: block; }
 .stage.binary .bit.b4  { left: 504px; }
 .stage.binary .bit.b2  { left: 756px; }
 .stage.binary .bit.b1  { left: 1008px; }
+
+/* loom slide: loom, then the loom-cards gif, then the early computer on top of it */
+.stage.loom .w1 { left: 740px; top: 0; }
+.stage.loom .w2 { left: 790px; top: 170px; z-index: 2; }
+.stage.loom .w3 { left: 860px; top: 330px; width: 340px; z-index: 3; }
