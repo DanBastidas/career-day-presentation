@@ -1252,7 +1252,9 @@ section.processing .browser .searching { display: block; }
   height: 600px;
 }
 .stage.binary .card { top: 70px; }
-.stage.binary .terminal { top: 340px; }
+.stage.binary .terminal { top: 322px; }
+/* tall enough for two lines of output plus the next prompt (./binary --explain, ./count 13) */
+.stage.binary .terminal .window-body { height: 230px; }
 .stage.binary .bit {
   position: absolute;
   top: 0;
